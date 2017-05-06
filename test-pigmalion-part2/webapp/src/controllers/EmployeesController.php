@@ -37,7 +37,7 @@ class EmployeesController
      */
     public function getAll($request, $response, $args) {
         $result = $this->hrService->getEmployees();
-        return $response->withJson($this->container);
+        return $response->withJson($result);
     }
 
     /**

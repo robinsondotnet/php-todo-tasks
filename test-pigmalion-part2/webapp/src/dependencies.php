@@ -22,15 +22,16 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-$container['db'] = function ($container) {
-    $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($container['settings']['db']);
-
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
-
-    return $capsule;
-};
+// Solo lo usaremos cuando necesitemos escribir información
+//$container['db'] = function ($container) {
+//    $capsule = new \Illuminate\Database\Capsule\Manager;
+//    $capsule->addConnection($container['settings']['db']);
+//
+//    $capsule->setAsGlobal();
+//    $capsule->bootEloquent();
+//
+//    return $capsule;
+//};
 
 $container[EmployeesController::class] = function ($c) {
     $service = $c->get(HumanResourceService::class);
@@ -42,8 +43,15 @@ $container[HumanResourceService::class] = function ($c) {
   return new HumanResourceService($repository);
 };
 
+$container['employeesJSON'] = function ($c) {
+    $path = $c->get('settings')['employees_json'];
+    $employees = json_decode(file_get_contents($path));
+    return $employees;
+};
+
 $container[EmployeeRepository::class] = function ($c) {
-    $table = $c->get('db')->table('employees');
-    return new EmployeeRepository($table);
+//    $table = $c->get('db')->table('employees');
+    $employees = $c->get('employeesJSON');
+    return new EmployeeRepository($employees);
 };
 

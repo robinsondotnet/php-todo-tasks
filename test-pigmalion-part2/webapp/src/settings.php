@@ -16,6 +16,8 @@ return [
             'level' => \Monolog\Logger::DEBUG,
         ],
 
+        'employees_json' => __DIR__ . '/data/employees.json',
+
         // Necesario para levantar la DB
         'determineRouteBeforeAppMiddleware' => false,
         'db' => [

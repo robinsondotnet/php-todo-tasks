@@ -9,13 +9,13 @@
 namespace robindotnet\Repositories;
 
 
-class EmployeeRepository extends BaseRepository implements IEmployeeRepository
+class EmployeeRepository implements IEmployeeRepository
 {
-    protected $table;
+    protected $employees;
 
-    public function __construct(Builder $table)
+    public function __construct($employees)
     {
-        $this->table = $table;
+        $this->employees = $employees;
     }
 
     public function get($id) {
@@ -23,7 +23,7 @@ class EmployeeRepository extends BaseRepository implements IEmployeeRepository
     }
 
     public function getAll() {
-
+        return $this->employees;
     }
 
 }
