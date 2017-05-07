@@ -9,6 +9,7 @@
 namespace robindotnet\Services;
 
 
+use robindotnet\Data\DTO\EmployeeFilterDTO;
 use robindotnet\Repositories\IEmployeeRepository;
 
 /**
@@ -40,6 +41,24 @@ class HumanResourceService implements IHumanResourceService
     {
         try {
             return $this->repository->getAll();
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function getEmployee($id)
+    {
+        try {
+            return $this->repository->get($id);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function find(EmployeeFilterDTO $filter)
+    {
+        try {
+            return $this->repository->find($filter);
         } catch (\Exception $e) {
             throw $e;
         }

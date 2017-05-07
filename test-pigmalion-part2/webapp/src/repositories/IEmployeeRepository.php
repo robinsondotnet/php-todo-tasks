@@ -9,10 +9,14 @@
 namespace robindotnet\Repositories;
 
 
+use robindotnet\Data\DTO\EmployeeFilterDTO;
+
 interface IEmployeeRepository
 {
     public function get($id);
 
     public function getAll();
+
+    public function find(EmployeeFilterDTO $filter);
 
 }

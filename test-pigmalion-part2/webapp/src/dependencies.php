@@ -2,6 +2,7 @@
 // DIC configuration
 
 use robindotnet\Controllers\EmployeesController;
+use robindotnet\Models\Employee;
 use robindotnet\Repositories\EmployeeRepository;
 use robindotnet\Services\HumanResourceService;
 
@@ -44,9 +45,10 @@ $container[HumanResourceService::class] = function ($c) {
 };
 
 $container['employeesJSON'] = function ($c) {
+    // todo: mejorar esto
     $path = $c->get('settings')['employees_json'];
     $employees = json_decode(file_get_contents($path));
-    return $employees;
+    return collect($employees);
 };
 
 $container[EmployeeRepository::class] = function ($c) {

@@ -8,6 +8,7 @@
 
 namespace robindotnet\Controllers;
 
+use robindotnet\Data\DTO\EmployeeFilterDTO;
 use robindotnet\Services\IHumanResourceService;
 
 /**
@@ -47,7 +48,17 @@ class EmployeesController
      * @return mixed
      */
     public function getById($request, $response, $args) {
-        return $response;
+        $result = $this->hrService->getEmployee($args['id']);
+        return $response->withJson($result);
+    }
+
+    public function find($request, $response, $args) {
+        $dto = new EmployeeFilterDTO($args);
+        $result = $this->hrService->find($dto);
+        $body = $response->getBody();
+        var_dump($result);
+//        $body->write($result);
+//        return $response;
     }
 
 }
