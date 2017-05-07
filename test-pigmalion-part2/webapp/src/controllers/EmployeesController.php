@@ -8,8 +8,16 @@
 
 namespace robindotnet\Controllers;
 
+use FetchLeo\LaravelXml\Converters\CollectionConverter;
+use Illuminate\Support\Collection;
+use robindotnet\Data\DTO\EmployeeDTO;
+use robindotnet\Data\DTO\EmployeeFeedDTO;
 use robindotnet\Data\DTO\EmployeeFilterDTO;
 use robindotnet\Services\IHumanResourceService;
+use robindotnet\Utils\XMLSerializer;
+use Sabre\Xml\Service as XmlService;
+use SimpleXMLElement;
+use Tartan\XmlResponse\XmlResponseServiceProvider;
 
 /**
  * Class EmployeesController
@@ -53,12 +61,14 @@ class EmployeesController
     }
 
     public function find($request, $response, $args) {
-        $dto = new EmployeeFilterDTO($args);
+        $dto = new EmployeeFilterDTO($request->getQueryParams());
         $result = $this->hrService->find($dto);
         $body = $response->getBody();
-        var_dump($result);
-//        $body->write($result);
-//        return $response;
+        $array = json_decode($result, true);
+        $xml = XMLSerializer::generateValidXmlFromArray($array, 'employees', 'employee');
+        $response->withHeader("Content-Type",'application/atom-xml');
+        $body->write($xml);
+        return $response;
     }
 
 }

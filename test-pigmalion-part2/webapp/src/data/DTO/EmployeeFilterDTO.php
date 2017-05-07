@@ -13,12 +13,14 @@ class EmployeeFilterDTO
 {
     public function __construct(array $input)
     {
-        $properties = get_object_vars($this);
-        $self = $this;
-        array_filter($properties, function($item) use ($self, $input) {
-            if(isset($input->{$item}))
-                $self->{$item} = $input->{$item};
-        });
+//        $properties = get_object_vars($this);
+//        $self = $this;
+//        array_filter($properties, function($item) use ($self, $input) {
+//            if(isset($input->{$item}))
+//                $self->{$item} = $input->{$item};
+//        });
+        $this->minSalary = $input['minSalary'];
+        $this->maxSalary = $input['maxSalary'];
     }
 
     private $minSalary;
