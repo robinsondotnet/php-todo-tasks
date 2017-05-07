@@ -23,13 +23,7 @@ class EmployeeRepository implements IEmployeeRepository
 
     public function get($id) {
 
-        foreach ( $this->employees as $employee ) {
-            if ( $id == $employee->id ) {
-                return $employee;
-            }
-        }
-
-        return false;
+        return $this->employees->where('id', $id)->first();
     }
 
 
