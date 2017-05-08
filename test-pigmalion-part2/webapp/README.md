@@ -8,3 +8,4 @@ Run this command to run the test suite
 
 	php composer.phar test
 
+![](img/DEVELOPERS_SAC.png?raw=true)
