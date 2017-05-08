@@ -8,4 +8,10 @@ Run this command to run the test suite
 
 	php composer.phar test
 
+## Librerias usadas 
+* SlimPHP
+* EloquentORM
+* JsonMapper
+* ReactJS (Frontend)
+
 ![](img/DEVELOPERS_SAC.png?raw=true)
